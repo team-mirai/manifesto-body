@@ -10,10 +10,10 @@ on:
 jobs:
   post-to-x:
     runs-on: ubuntu-latest
-    # マージされたPRのみX投稿を実行する（skip-notificationラベルがついていない場合）
+    # マージされたPRのみX投稿を実行する（trigger-notificationラベルがついている場合）
     if: |
       github.event.pull_request.merged == true &&
-      !contains(github.event.pull_request.labels.*.name, 'skip-notification')
+      contains(github.event.pull_request.labels.*.name, 'trigger-notification')
     steps:
       - name: Post X
         run: |
